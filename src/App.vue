@@ -1,10 +1,15 @@
 <script setup>
 import Home from './pages/Home/Home.vue'
+import Nav from './components/Nav/Nav.vue'
+import { provide } from 'vue';
+
+provide('location', 'value');
 </script>
 
 <template>
   <div>
-    <Home />
+    <Nav />
+    <router-view></router-view>
   </div>
 </template>
 
