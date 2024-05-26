@@ -3,6 +3,7 @@ import { ROUTES } from '../constantes';
 import Home from "../pages/Home/Home.vue"
 import User from "../pages/User/User.vue"
 import Detail from "../pages/Detail/Detail.vue"
+import Friends from '../pages/Friends/Friends.vue';
 
 const routes = [
     {
@@ -19,6 +20,11 @@ const routes = [
         path: ROUTES.detail,
         name: 'Detail',
         component: Detail
+    },
+    {
+        path: ROUTES.friends,
+        name: 'Friends',
+        component: Friends
     }
 ];
 

@@ -2,10 +2,10 @@
 import { ref } from "vue";
 
 defineEmits(['clicker'])
-defineProps(['name'])
+defineProps(['name','type',"icon"])
 
 </script>
  
 <template>
-    <button style="margin:0 10px" @click="$emit('clicker')">{{name}}</button>
+    <button :type="type||'button'" style="margin:0 10px" class="p-button text-center" @click="$emit('clicker')">{{name}}</button>
 </template>

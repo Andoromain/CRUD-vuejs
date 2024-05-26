@@ -2,22 +2,15 @@
 import { ref } from "vue";
 import Forms from "./Forms/Forms.vue";
 import Lists from "./Lists/Lists.vue";
+import { inject } from "vue"
 
-const data = ref([])
-
-const save = (e) => {
-    data.value = [...data.value, e];
-}
-
-const remove = (index)=>{
-    data.value = data.value.filter((l,i)=>index!=i )
-}
+const {data,save,remove} = inject("data");
 
 </script>
 
 <template>
   <div>
-    <h1>Page user</h1> 
+    <h1 class="text-center">Page user</h1> 
     <Forms @save="save"></Forms> 
     <Lists :data="data" @remove="remove"></Lists>
   </div>
