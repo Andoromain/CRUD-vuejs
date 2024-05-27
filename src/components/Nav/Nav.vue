@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 
 import InputText from 'primevue/inputtext';
 
-const {recherche} = inject('data');
+const {search} = inject('data');
 
 const router = useRouter();
 
@@ -54,7 +54,7 @@ const items = ref([
             </template>
             <template #end>
                 <div class="flex align-items-center gap-2">
-                    <InputText placeholder="Search" type="text" @change="(e)=>{recherche(e.target.value)}" class="w-8rem sm:w-auto" />
+                    <InputText placeholder="Search" type="text" v-model="search"  class="w-8rem sm:w-auto" />
                 </div>
             </template>
         </Menubar>

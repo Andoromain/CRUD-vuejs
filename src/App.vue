@@ -1,7 +1,7 @@
 <script setup>
 import Home from './pages/Home/Home.vue'
 import Nav from './components/Nav/Nav.vue'
-import { ref, provide, watch, onBeforeMount, onMounted } from 'vue';
+import { ref, provide, watch, onBeforeMount, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { Get } from './Http/Http';
 import ProgressSpinner from 'primevue/progressspinner';
@@ -11,7 +11,9 @@ const router = useRouter();
 
 const data = ref([]);
 
-const friends = ref([]);
+const search = ref('');
+
+const filters = ref([]);
 
 const loading = ref(false);
 
@@ -47,21 +49,20 @@ const save = (e) => {
   data.value = [...data.value, e];
 }
 
-const remove = (index) => {
-  data.value = data.value.filter((l, i) => index != i)
+const remove = (e) => {
+  data.value = data.value.filter((item) => e != item.email)
 }
 
 const recherche = (text) => {
-  console.log(text)
-  data.value = data.value.filter((item) => {
-    const match = item?.name.toLowerCase().includes(text.toLowerCase() ?? '') || item?.username.toLowerCase().includes(text.toLowerCase() ?? '') || item?.email.toLowerCase().includes(text.toLowerCase() ?? '') || item?.email.toLowerCase().includes(text.toLowerCase() ?? '');
+  filters.value = data.value.filter((item) => {
+    const match = item?.name.toLowerCase().includes(text.toLowerCase() ?? '') || item?.username.toLowerCase().includes(text.toLowerCase() ?? '') || item?.email.toLowerCase().includes(text.toLowerCase() ?? '') || item?.city.toLowerCase().includes(text.toLowerCase() ?? '');
     return match;
   });
 }
 
-const addFriend = (index) => {
+const addFriend = (param) => {
   data.value = data.value.map((item, i) => {
-    if (i === index) {
+    if (param === item.email) {
       item.friend = true;
     }
     return item
@@ -82,10 +83,18 @@ const goToDetail = (item) => {
 };
 
 watch(() => data, () => {
-  friends.value = data.value.filter((item) => item.friend === true)
-}, { immediate: true, deep: true })
+  recherche(search.value)
+}, { immediate: true, deep: true });
 
-provide('data', { data, remove, save, addFriend, deleteFriend, goToDetail, friends ,recherche});
+watch(search, () => {
+  recherche(search.value)
+}, { immediate: true });
+
+const friends = computed(()=>{
+  return data.value.filter((item) => item.friend === true);
+}) 
+
+provide('data', { data: data, remove, save, addFriend, deleteFriend, goToDetail, friends , search,filters });
 
 
 </script>

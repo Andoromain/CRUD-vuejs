@@ -41,10 +41,10 @@ const remove = (e) => {
             </div>
           </div>
           <div class="mt-3 lg:mt-0">
-            <ButtonPrime v-if="!item.friend" @click="addFriend(index)" label="Ajouter ami" class="p-button-outlined mr-2"
+            <ButtonPrime v-if="!item.friend" @click="addFriend(item.email)" label="Ajouter ami" class="p-button-outlined mr-2"
               icon="pi pi-user-plus"></ButtonPrime>
             <ButtonPrime @click="goToDetail(item)" label="Details" class="mr-2" serverity="contrast"></ButtonPrime>
-            <ButtonPrime @click="remove(index)" severity="danger" icon="pi pi-times"></ButtonPrime>
+            <ButtonPrime @click="remove(item.email)" severity="danger" icon="pi pi-times"></ButtonPrime>
           </div>
         </div>
         <template v-if="index < data.length - 1">
