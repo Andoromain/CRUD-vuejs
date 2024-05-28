@@ -5,7 +5,29 @@ import { ref, provide, watch, onBeforeMount, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { Get } from './Http/Http';
 import ProgressSpinner from 'primevue/progressspinner';
+import { useStore } from 'vuex';
 
+
+//vuex
+const store=useStore();
+
+//getters
+const getUsersVuex = computed(()=>store.getters.getUsers);
+
+
+//mutation
+const addUser = () => {
+  store.commit('addUser', {name: 'test', username: 'test', email: 'test', city: 'test', friend: false})
+}
+
+//action
+const fetchUsers = () => {
+  if(getUsersVuex.value.length===0){
+    store.dispatch('fetchUsers');
+  }
+}
+
+//vuex
 
 const router = useRouter();
 
@@ -25,7 +47,7 @@ const getUsers = () => {
       const temp = response.data.data.map((item) => {
         const newItem = {
           name: item.name,
-          username: item.name,
+          username: item.username,
           email: item.email,
           city: item.address.city,
           friend: false
@@ -88,7 +110,7 @@ watch(() => data, () => {
 
 watch(search, () => {
   recherche(search.value)
-}, { immediate: true });
+});
 
 const friends = computed(()=>{
   return data.value.filter((item) => item.friend === true);
