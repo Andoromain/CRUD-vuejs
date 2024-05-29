@@ -3,7 +3,7 @@ import { API } from "@/constantes/index.js";
 
 const axiosConfig = () => {
     return axios.create({
-        baseURL: API.base_url,
+        // baseURL: API.base_url,
         // headers: {
         //     Authorization: "Bearer " + localStorage.getItem("token"),
         //     "Access-Control-Allow-Origin": "*",

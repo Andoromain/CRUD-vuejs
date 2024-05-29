@@ -1,10 +1,32 @@
 <script setup>
-import { inject } from 'vue';
 import Divider from 'primevue/divider';
-import { useRouter } from "vue-router";
 import ButtonPrime from "primevue/button"
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-const {friends,deleteFriend,goToDetail} = inject("data")
+const store =useStore();
+
+const router=useRouter();
+
+const friends = computed(()=>store.getters.getFriends);
+
+const users = computed(()=>store.getters.getUsers);
+
+const deleteFriend = (email) => {
+  const data = users.value.map((item, i) => {
+    if (item.email === email) {
+      item.friend = false;
+    }
+    return item
+  });
+
+  store.commit("setUsers", data);
+}
+
+const goToDetail = (item) => {
+  router.push({ name: "Detail", query: item });
+}
 
 </script>
 

@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home.vue"
 import User from "../pages/User/User.vue"
 import Detail from "../pages/Detail/Detail.vue"
 import Friends from '../pages/Friends/Friends.vue';
+import Pokemons from '../pages/Pokemon/Pokemon.vue';
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
         path: ROUTES.friends,
         name: 'Friends',
         component: Friends
+    },
+    {
+        path: ROUTES.pokemons,
+        name: 'Friends',
+        component: Pokemons
     }
 ];
 

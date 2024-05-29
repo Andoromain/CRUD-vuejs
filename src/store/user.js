@@ -1,3 +1,6 @@
+import { API } from "../constantes";
+import {Get} from "@/Http"
+
 export const user = {
     state: {
         users: [],
@@ -8,13 +11,19 @@ export const user = {
             return state.users;
         },
 
-        getUsetByEmail(state) {
-            return (id) => {
-                return state.users.find((user) => user.email === email);
-            };
+        getLoading(state) {
+            return state.loading;
         },
+
+        getFriends(state) {
+            return state.users.filter((item) => item.friend === true);
+        },
+
     },
     mutations: {
+        setLoading(state, loading) {
+            state.loading = loading;
+        },
         setUsers(state, users) {
             state.users = users;
         },
@@ -24,15 +33,13 @@ export const user = {
         removeUser(state, email) {
             state.users = state.users.filter((user) => user.email !== email);
         },
-        updateUser(state, user) {
-            const index = state.users.findIndex((u) => u.email === user.email);
-            state.users.splice(index, 1, user);
-        },
     },
     actions: {
         async fetchUsers(context) {
-            const { data } = await fetch(API.base_url + API.users);
-            if (data.data) {
+            context.commit('setLoading',true)
+            const { data } = await Get({url:`${API.base_url_user}${API.users}`});
+        
+            if (data) {
                 const temp = data.data.map((item) => {
                   const newItem = {
                     name: item.name,
@@ -44,7 +51,8 @@ export const user = {
                   return newItem
                 });
                 context.commit("setUsers", temp);
-              }
+            }
+            context.commit('setLoading',false)
         },
     },
 }

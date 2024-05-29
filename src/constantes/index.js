@@ -3,9 +3,12 @@ export const ROUTES = {
   user: "/user",
   detail: "/detail",
   friends: "/friends",
+  pokemons:"/pokemons",
 };
 
 export const API = {
-  base_url: import.meta.env.VITE_APP_API_URL,
-  users: "/users",
+  base_url_user: import.meta.env.VITE_APP_API_URL_USER,
+  base_url_pokemon: import.meta.env.VITE_APP_API_URL_POKEMON,
+  users: "users",
+  pokemons:"pokemon/limit/10"
 };

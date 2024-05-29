@@ -6,8 +6,6 @@ import { useRouter } from 'vue-router';
 
 import InputText from 'primevue/inputtext';
 
-const {search} = inject('data');
-
 const router = useRouter();
 
 const items = ref([
@@ -31,7 +29,14 @@ const items = ref([
         command: () => {
             router.push(ROUTES.friends)
         }
-    }
+    },
+    {
+        label: 'Pokemons',
+        icon: 'pi pi-sitemap',
+        command: () => {
+            router.push(ROUTES.pokemons)
+        }
+    },
 ]);
 
 </script>
@@ -53,9 +58,7 @@ const items = ref([
                 </a>
             </template>
             <template #end>
-                <div class="flex align-items-center gap-2">
-                    <InputText placeholder="Search" type="text" v-model="search"  class="w-8rem sm:w-auto" />
-                </div>
+               
             </template>
         </Menubar>
     </nav>

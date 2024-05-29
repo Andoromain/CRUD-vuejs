@@ -1,19 +1,21 @@
 <script setup>
-import Button from "@/components/Button/button.vue";
 import { useRouter } from "vue-router";
 import ButtonPrime from "primevue/button"
 import Divider from "primevue/divider"
-import { inject } from "vue";
 
-const props = defineProps(["data"]);
-
-const { addFriend, goToDetail } = inject("data")
+const props = defineProps(["data","addFriend"]);
 
 const emit = defineEmits(["remove"]);
 
 const remove = (e) => {
   emit("remove", e);
 };
+
+const router = useRouter();
+
+const goToDetail = (item) => {
+  router.push({ name: "Detail", query: item });
+}
 
 </script>
 
@@ -51,7 +53,7 @@ const remove = (e) => {
           <Divider />
         </template>
       </template>
-      <template v-if="data.length === 0">
+      <template v-if="data && data.length === 0">
         <div className="w-full surface-card py-8 px-5 sm:px-8 flex flex-column align-items-center">
           <span className="text-blue-500 font-bold text-2xl">Aucun utilisateurs</span>
         </div>
