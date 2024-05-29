@@ -29,7 +29,7 @@ const routes = [
     },
     {
         path: ROUTES.pokemons,
-        name: 'Friends',
+        name: 'Pokemons',
         component: Pokemons
     }
 ];

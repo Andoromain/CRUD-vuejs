@@ -8,8 +8,6 @@ import Button from "primevue/button";
 const router = useRouter()
 const route = useRoute()
 
-const state = inject("location");
-
 onBeforeMount(() => {
     if (Object.keys(route.query).length === 0) {
         router.go(-1)

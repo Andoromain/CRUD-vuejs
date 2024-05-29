@@ -37,20 +37,25 @@ export const user = {
     actions: {
         async fetchUsers(context) {
             context.commit('setLoading',true)
-            const { data } = await Get({url:`${API.base_url_user}${API.users}`});
-        
-            if (data) {
-                const temp = data.data.map((item) => {
-                  const newItem = {
-                    name: item.name,
-                    username: item.username,
-                    email: item.email,
-                    city: item.address.city,
-                    friend: false
-                  }
-                  return newItem
-                });
-                context.commit("setUsers", temp);
+
+            try{
+                const { data } = await Get({url:`${API.base_url_user}${API.users}`});
+            
+                if (data) {
+                    const temp = data.data.map((item) => {
+                    const newItem = {
+                        name: item.name,
+                        username: item.username,
+                        email: item.email,
+                        city: item.address.city,
+                        friend: false
+                    }
+                    return newItem
+                    });
+                    context.commit("setUsers", temp);
+                }
+            }catch(e){
+                console.error(e)
             }
             context.commit('setLoading',false)
         },

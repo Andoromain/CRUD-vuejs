@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onBeforeMount } from "vue";
 import Forms from "./Forms/Forms.vue";
-import Lists from "@/components/Lists/Lists.vue";
+import Lists from "@/pages/User/Lists/Lists.vue";
 import { useStore } from "vuex";
 import InputText from "primevue/inputtext";
 import ProgressSpinner from "primevue/progressspinner";

@@ -12,6 +12,9 @@ export const pokemon = {
         setPokemons(state, pokemons) {
             state.pokemons = pokemons;
         },
+        removePokemon(state,id){
+            state.pokemons = state.pokemons.filter((item) => item.id !== id);
+        }
     },
     actions: {
         async fetchPokemons({ commit }) {
